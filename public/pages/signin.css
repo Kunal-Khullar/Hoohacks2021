@@ -1,0 +1,36 @@
+body {
+  background-color: #86f0d3;
+  align-items: baseline;
+  overflow: hidden;
+}
+
+#modal {
+  background-color: #fff;
+  margin: 10vh;
+  margin-left: 45vh;
+  height: 80vh;
+  border-radius: 30px;
+  width: 80%;
+}
+#modal img {
+  height: 100%;
+  padding: 0;
+  width: 100%;
+  border-radius: 30px;
+}
+#modal .form-group {
+  margin-bottom: 6vh;
+}
+.imgDiv {
+  padding: 0;
+
+  background: url("https://cdn.dribbble.com/users/3960463/screenshots/14473863/119_medical_care-01.png")
+    no-repeat center center;
+  background-size: cover;
+}
+.form {
+  padding-top: 18vh;
+}
+#mainRow {
+  height: 80vh;
+}
