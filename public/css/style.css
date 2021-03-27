@@ -3,12 +3,7 @@ body{
     background-color: #91dae6 !important;
     overflow: hidden;
     font-family: 'Poppins', sans-serif !important;
-    background: rgba( 216, 212, 212, 0.10 );
-box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
-backdrop-filter: blur( 10.5px );
--webkit-backdrop-filter: blur( 10.5px );
-border-radius: 10px;
-border: 1px solid rgba( 255, 255, 255, 0.18 );
+    
 }
 .container_left{
 background: url("https://cdn.dribbble.com/users/3960463/screenshots/14473863/119_medical_care-01.png") no-repeat center center;
@@ -23,10 +18,10 @@ z-index: 10;
     margin-top: 5rem;
     margin-left: 6rem;
     width:70%;
-    background: rgba( 216, 212, 212, 0.05 );
-box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
-backdrop-filter: blur( 2.0px );
--webkit-backdrop-filter: blur( 2.0px );
+    background: rgba(0, 0, 0, 0.1);
+box-shadow: 0 8px 32px 0 rgba( 0, 0, 0, 0.47 );
+backdrop-filter: blur( 9px );
+-webkit-backdrop-filter: blur( 8.5px );
 border-radius: 10px;
 border: 1px solid rgba( 255, 255, 255, 0.18 );
 }
@@ -39,6 +34,42 @@ border: 1px solid rgba( 255, 255, 255, 0.18 );
 }
 .innerGlass h1{
     color: snow;
+    font-family: 'Poppins';
+    margin-left: 2rem;
+    margin-top: 2rem;
+    font-size: 3rem;
+    text-shadow: 1px 1px 4px;
+    
+}
+.innerGlass h6{
+    width:10rem;
+    color: snow;
+    font-weight: bolder;
+    /* margin-left: 2rem; */
+    padding-left: 2rem;
+    padding-top: 1rem;
+    transition: transform linear 200ms;
+    font-size: 1.3rem;
+    text-decoration: none;
+}
+.innerGlass h6:hover{
+    color: snow;
+    transform: scale(1.1);
+    text-decoration: none;
+}
+.innerGlass a:hover{
+    text-decoration: none;
+}
+.golog{
+    margin-top: 15rem;
+}
+.innerGlass p{
+    color: snow;
+    font-family: 'POPPINS';
+    width: 70%;
+    margin-left: 2rem;
+    margin-top: 4rem;
+    opacity: 0.8;
 }
 .main_container .row{
     height:100vh
@@ -77,8 +108,13 @@ border: 1px solid rgba( 255, 255, 255, 0.18 );
     background: darkslateblue !important;
     color: white !important;
     border: 1px solid darkslateblue !important;
+    margin-top: 4rem;
 }
 .buttons:hover{
     background-color: snow !important;
     color: darkslateblue !important;
+}
+#id1{
+    background:url("https://cdn.dribbble.com/users/59947/screenshots/15147954/muti_2_4x.jpg") no-repeat center center;
+    background-size: cover !important;
 }
