@@ -1,0 +1,84 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
+body{
+    background-color: #91dae6 !important;
+    overflow: hidden;
+    font-family: 'Poppins', sans-serif !important;
+    background: rgba( 216, 212, 212, 0.10 );
+box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+backdrop-filter: blur( 10.5px );
+-webkit-backdrop-filter: blur( 10.5px );
+border-radius: 10px;
+border: 1px solid rgba( 255, 255, 255, 0.18 );
+}
+.container_left{
+background: url("https://cdn.dribbble.com/users/3960463/screenshots/14473863/119_medical_care-01.png") no-repeat center center;
+background-size: cover;
+/* border-radius: 1rem !important; */
+margin-right:-10px ;
+z-index: 10;
+}
+.innerGlass{
+    height:80vh;
+    
+    margin-top: 5rem;
+    margin-left: 6rem;
+    width:70%;
+    background: rgba( 216, 212, 212, 0.05 );
+box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+backdrop-filter: blur( 2.0px );
+-webkit-backdrop-filter: blur( 2.0px );
+border-radius: 10px;
+border: 1px solid rgba( 255, 255, 255, 0.18 );
+}
+.main_container{
+    /* width:80%; */
+    box-shadow: .6px 0.6px 10px -4px;
+    height:100vh;
+  /* margin: 5% 10%; */
+   
+}
+.innerGlass h1{
+    color: snow;
+}
+.main_container .row{
+    height:100vh
+}
+.container_right{
+    justify-content: center;
+    background: #f2ffff;
+    /* border-top-right-radius: 1rem !important;
+    border-bottom-right-radius: 1rem !important; */
+    padding: 2rem;
+   
+}
+.hide{
+    display: none;
+}
+.container_right h2{
+    text-align: center;
+    font-size: 3rem;
+    margin-top: 1rem;
+    font-weight: bolder;
+    color: darkslateblue;
+    text-shadow: 2px 2px 3px #aaa;
+}
+.container_right form{
+    padding: 3.5rem;
+    text-align: center;
+    margin-top: 2rem;
+}
+.container_right .form-group{
+    text-align: left;
+}
+.buttons{
+    width:6rem !important;
+    height:2.5rem !important;
+    transition:background-color 500ms ease !important;
+    background: darkslateblue !important;
+    color: white !important;
+    border: 1px solid darkslateblue !important;
+}
+.buttons:hover{
+    background-color: snow !important;
+    color: darkslateblue !important;
+}
