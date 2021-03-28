@@ -84,8 +84,27 @@
           <div id="nutrition" class="nutritionstats">
             <h1>Your nutrition Statistics</h1>
             <div class="row">
-                <div class="col-md-6">
+                <table class="table table-bordered">
+                    <thead>
+                      <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Date</th>
+                        <th scope="col">Meal</th>
+                        <th scope="col">Proteins</th>
+                        <th scope="col">Carbs</th>
+                        <th scope="col">Fats</th>
+                        <th scope="col">Vitamins</th>
+                        <th scope="col">Minerals</th>
+                      </tr>
+                    </thead>
+                    <tbody id="nutrients">
                     
+                    </tbody>
+                  </table>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <canvas id="myChart2" width="200" height="200"></canvas>
                 </div>
                 <div class="col-md-6">
                     
