@@ -91,32 +91,4 @@ const Login = async (username, password) => {
             window.location.href = 'home.html';
         });
 }
-fetch('https://veehacks-backend.herokuapp.com/graphql/', {
-    method: 'POST',
-    headers: {
-        'Content-Type': 'application/json',
-        "Authorization": `JWT ${localStorage.getItem('token')}`
-    },
-    body: JSON.stringify({
-        query: `
-        query getLeaderBoard{
-  
-            leaderBoard{
-              name
-              maxScore
-              nutrition
-              image
-              gameLife
-            }
-          }
-           `,
-       
-    }),
-})
-    .then((res) => res.json())
-    .then((result) => {
-        console.log(result.data);
-        
-        // localStorage.setItem('token', result.data.tokenAuth.token) //saving token
-        // window.location.href = 'home.html';
-    });
+
