@@ -118,6 +118,82 @@ var myChart = new Chart(ctx, {
                 }
             }]
         }
+
+    });
+    var ctx2 = document.getElementById('myChart2')
+    data = {
+       
+            labels: [
+              'Red',
+              'Blue',
+              'Yellow'
+            ],
+            datasets: [{
+              label: 'My First Dataset',
+              data: [30, 50, 20],
+              backgroundColor: [
+                'rgb(255, 99, 132)',
+                'rgb(54, 162, 235)',
+                'rgb(255, 205, 86)'
+              ],
+ 
+                   }]
+               }           
+    var myPieChart = new Chart(ctx2, {
+        type: 'pie',
+        data: data,
+        
+    });
+
+    fetch('https://veehacks-backend.herokuapp.com/graphql/', {
+    method: 'POST',
+    headers: {
+        'Content-Type': 'application/json',
+        "Authorization": `JWT ${localStorage.getItem('token')}`
+    },
+    body: JSON.stringify({
+        query: `
+        query getNutrition{
+  
+            nutrition{
+            foodName
+              carbs
+              protein
+              fats
+              minerals
+              vitamins
+              Date
+            }
+          }
+           `,
+
     }
 });
 
+
+    }),
+})
+    .then((res) => res.json())
+    .then((result) => {
+
+        console.log(result.data);
+        result.data.nutrition.map((item, j) => {
+            document.getElementById("nutrients").innerHTML +=
+                `
+                <tr>
+                <th scope='row'>${j+1}</th>
+                <td>${item.Date}</td>
+                <td>${item.foodName}</td>
+                <td>${item.protein}</td>
+                <td>${item.carbs}</td>
+                <td>${item.fats}</td>
+                <td>${item.vitamins}</td>
+                <td>${item.minerals}</td>
+              </tr>
+            
+            `
+        })
+
+        // localStorage.setItem('token', result.data.tokenAuth.token) //saving token
+        // window.location.href = 'home.html';
+    });

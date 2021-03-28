@@ -220,4 +220,14 @@ td,th {
 }
 canvas{
     padding: 1rem;
+    width:40rem !important;
+    height: 30rem !important;
+}
+.nutritionstats table{
+    margin: 1rem 2rem;
+}
+#myChart2{
+    width:30rem !important;
+    margin-left: 5rem;
+    height:28rem !important
 }
