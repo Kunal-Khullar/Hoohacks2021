@@ -71,8 +71,25 @@ border: 1px solid rgba( 255, 255, 255, 0.18 );
     margin-top: 4rem;
     opacity: 0.8;
 }
+nav{
+    background-color:darkslateblue !important;
+    padding: 0px !important
+}
 .main_container .row{
     height:100vh
+}
+nav li a{
+    color: snow !important;
+    transition: background-color 500ms ease;
+    padding: 1rem !important;
+}
+nav li a:hover{
+    background-color: snow !important;
+    color:darkslateblue !important;
+}
+nav li a:focus{
+    background-color:snow !important;
+    color: darkslateblue !important;
 }
 .container_right{
     justify-content: center;
@@ -81,6 +98,12 @@ border: 1px solid rgba( 255, 255, 255, 0.18 );
     border-bottom-right-radius: 1rem !important; */
     padding: 2rem;
    
+}
+ul{
+    margin-left: 35rem;
+}
+li{
+    padding-left: 5rem !important;
 }
 .hide{
     display: none;
