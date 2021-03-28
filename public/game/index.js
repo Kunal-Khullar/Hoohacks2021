@@ -13,7 +13,8 @@ import Counter from './src/counter.js'
 import Spikes from './src/spikes.js'
 import Controls from './src/controls.js'
 import Editor from './src/editor.js'
-var myvar = 1700;
+
+
 class Scene extends Body {
   constructor(game, levels) {
     super(document.getElementById('game'))
@@ -23,6 +24,7 @@ class Scene extends Body {
     this.esc = new Body(document.getElementById('esc'))
     this.game = game
     this.levels = levels
+   
     this.bars = []
     this.spikes = []
     this.paused = false
@@ -272,6 +274,8 @@ class Scene extends Body {
   }
 
   tick(scale) {
+    
+
     if (this.paused || this.hidden) return
 
     this.guy.tick(scale)
@@ -283,7 +287,7 @@ class Scene extends Body {
     this.guy.y += Math.min(bottom, Math.max(top, this.guy.vy))
 
     if (bottom === 0) {
-      this.guy.vy = upKey() ? -scale(myvar) : 0
+      this.guy.vy = upKey() ? -scale(900+localStorage.getItem('nutrition')*10) : 0
       if (upKey()) JUMP_FX.play()
     } else {
       this.guy.vy = Math.min(scale(600), this.guy.vy + scale(120))
