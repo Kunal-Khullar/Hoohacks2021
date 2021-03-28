@@ -25,6 +25,7 @@ We used html and vanilla JavaScript for webpage. Backend is made using graphql. 
 - Html
 - CSS
 - JavaScript
+- Django
 - Graphql
 - Firebase
 - Google MLKit
