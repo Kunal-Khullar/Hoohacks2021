@@ -71,6 +71,9 @@ border: 1px solid rgba( 255, 255, 255, 0.18 );
     margin-top: 4rem;
     opacity: 0.8;
 }
+#homebody{
+    background:snow !important;
+}
 nav{
     background-color:darkslateblue !important;
     padding: 0px !important
