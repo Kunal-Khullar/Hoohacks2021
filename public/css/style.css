@@ -212,3 +212,12 @@ td,th {
 .right::-webkit-scrollbar{
     display:none
 }
+.nutritionstats h1{
+    text-align:center;
+    font-size: 3rem;
+    margin: 2rem 0rem;
+    text-shadow: 1px 1px 3px;
+}
+canvas{
+    padding: 1rem;
+}
