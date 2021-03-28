@@ -1,4 +1,4 @@
-import {onPress, upKey} from './src/keys.js'
+import { onPress, upKey } from './src/keys.js'
 import levels from './src/levels.js'
 import sleep from './src/sleep.js'
 import Body from './src/body.js'
@@ -6,16 +6,16 @@ import Goal from './src/goal.js'
 import Guy from './src/guy.js'
 import Bar from './src/bar.js'
 import Title from './src/title.js'
-import {GOAL_FX, JUMP_FX, DEATH_FX, ON_FX, OFF_FX, playWin, playMusic} from './src/sound.js'
+import { GOAL_FX, JUMP_FX, DEATH_FX, ON_FX, OFF_FX, playWin, playMusic } from './src/sound.js'
 import create from './src/create.js'
-import {WIDTH, HEIGHT} from './src/dimensions.js'
+import { WIDTH, HEIGHT } from './src/dimensions.js'
 import Counter from './src/counter.js'
 import Spikes from './src/spikes.js'
 import Controls from './src/controls.js'
 import Editor from './src/editor.js'
 var myvar = 1700;
 class Scene extends Body {
-  constructor (game, levels) {
+  constructor(game, levels) {
     super(document.getElementById('game'))
     this.deaths = new Counter(document.getElementById('death-counter'))
     this.stars = new Counter(document.getElementById('level-counter'))
@@ -33,16 +33,16 @@ class Scene extends Body {
     this.index = 0
   }
 
-  get fromURL () {
+  get fromURL() {
     return !!this._fromURL
   }
 
-  set fromURL (value) {
+  set fromURL(value) {
     this._fromURL = !!value
     this.esc.hidden = !this.fromURL
   }
 
-  keydown ({key}) {
+  keydown({ key }) {
     switch (key) {
       case 'Enter':
         if (this.finished) {
@@ -63,21 +63,21 @@ class Scene extends Body {
     }
   }
 
-  get on () {
+  get on() {
     return this._on
   }
 
-  set on (value) {
+  set on(value) {
     this._on = value
     document.body.classList.toggle('on', value)
     document.body.classList.toggle('off', !value)
   }
 
-  get index () {
+  get index() {
     return this._index
   }
 
-  set index (value) {
+  set index(value) {
     this._index = Math.min(this.levels.length, Math.max(value || 0))
 
     this.on = true
@@ -112,15 +112,46 @@ class Scene extends Body {
     }
   }
 
-  get level () {
+  get level() {
     return this.levels[this.index]
   }
 
-  get finished () {
+  get finished() {
     return this.index >= this.levels.length
   }
 
-  async advance () {
+  async advance() {
+    fetch('https://veehacks-backend.herokuapp.com/graphql/', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        "Authorization": `JWT ${localStorage.getItem('token')}`
+      },
+      body: JSON.stringify({
+        query: `
+          mutation UpdateUser($life:Int,$score:Int){
+            updateUser(life:$life,score:$score){
+              update{
+                maxScore
+                gameLife
+              }
+            }
+          }
+             `,
+        variables: {
+          life: localStorage.getItem('lives'),
+          score: this.index + 1
+
+        }
+      }),
+    })
+      .then((res) => res.json())
+      .then((result) => {
+        console.log(result.data)
+        localStorage.setItem("lives", result.data.updateUser.update.gameLife)
+
+      });
+
     GOAL_FX.play()
     this.paused = true
     document.body.classList.add('finish')
@@ -135,27 +166,73 @@ class Scene extends Body {
     }
   }
 
-  async death () {
+  async death() {
+    if (localStorage.getItem("lives") <= 0) {
+      alert("not enough lives log your food on our app");
+      window.location.href = "../pages/home.html"
+    }
     DEATH_FX.play()
     this.deaths.value += 1
-    this.paused = true
-    const death = document.getElementById('death')
-    death.setAttribute('x', this.guy.x - 32 + this.guy.width / 2)
-    death.setAttribute('y', this.guy.y - 32 + this.guy.height / 2)
-    this.guy.element.setAttribute('hidden', true)
-    document.body.classList.add('dying')
-    await sleep(700)
-    document.body.classList.remove('dying')
-    this.reset()
-    this.guy.element.removeAttribute('hidden')
-    this.paused = false
+
+    if (this.deaths.value > localStorage.getItem('lives')) {
+      console.log("here")
+      document.body.classList.add('finish')
+
+      this.index = 0;
+      document.body.classList.remove('finish')
+      this.deaths.value = 0;
+    }
+    else {
+      fetch('https://veehacks-backend.herokuapp.com/graphql/', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          "Authorization": `JWT ${localStorage.getItem('token')}`
+        },
+        body: JSON.stringify({
+          query: `
+          mutation UpdateUser($life:Int,$score:Int){
+            updateUser(life:$life,score:$score){
+              update{
+                maxScore
+                gameLife
+              }
+            }
+          }
+             `,
+          variables: {
+            life: localStorage.getItem('lives') - 1,
+            score: this.index + 1
+
+          }
+        }),
+      })
+        .then((res) => res.json())
+        .then((result) => {
+          console.log(result.data)
+          localStorage.setItem("lives", result.data.updateUser.update.gameLife)
+
+        });
+
+      this.paused = true
+      const death = document.getElementById('death')
+      death.setAttribute('x', this.guy.x - 32 + this.guy.width / 2)
+      death.setAttribute('y', this.guy.y - 32 + this.guy.height / 2)
+      this.guy.element.setAttribute('hidden', true)
+      document.body.classList.add('dying')
+      await sleep(700)
+      document.body.classList.remove('dying')
+      this.reset()
+      this.guy.element.removeAttribute('hidden')
+      this.paused = false
+    }
   }
 
-  reset () {
+  reset() {
     this.guy.load(...this.level[0])
   }
 
-  lost () {
+  lost() {
     return this.guy.bottom > HEIGHT || this.bars.some((bar) =>
       bar.on === this.on && bar.overlaps(this.guy)
     ) || this.spikes.some((spike) =>
@@ -163,8 +240,8 @@ class Scene extends Body {
     )
   }
 
-  setBounds (body) {
-    const {bounds} = body
+  setBounds(body) {
+    const { bounds } = body
 
     bounds.left = -body.left
     bounds.right = WIDTH - body.right
@@ -194,15 +271,15 @@ class Scene extends Body {
     return bounds
   }
 
-  tick (scale) {
+  tick(scale) {
     if (this.paused || this.hidden) return
 
     this.guy.tick(scale)
 
-    const {left, right} = this.setBounds(this.guy)
+    const { left, right } = this.setBounds(this.guy)
     this.guy.x += Math.min(right, Math.max(left, this.guy.vx))
 
-    const {top, bottom} = this.setBounds(this.guy)
+    const { top, bottom } = this.setBounds(this.guy)
     this.guy.y += Math.min(bottom, Math.max(top, this.guy.vy))
 
     if (bottom === 0) {
@@ -221,12 +298,12 @@ class Scene extends Body {
 }
 
 class Game {
-  constructor () {
+  constructor() {
     this.title = new Title(this)
     this.controls = new Controls(this)
     this.scene = new Scene(this, levels)
     this.editor = new Editor(
-      [[[100, 300], [500, 300], [[84,361,362,48,1]], [[446,401,176,8,1,"up"]]]],
+      [[[100, 300], [500, 300], [[84, 361, 362, 48, 1]], [[446, 401, 176, 8, 1, "up"]]]],
       this
     )
     this.dialog = document.getElementById('dialog')
@@ -234,24 +311,24 @@ class Game {
     document.addEventListener('keydown', this.keydown.bind(this))
   }
 
-  toggle () {
+  toggle() {
     this.scene.on = !this.scene.on
     if (this.scene.on) OFF_FX.play()
     else ON_FX.play()
   }
 
-  keydown (event) {
+  keydown(event) {
     if (event.key === ' ') this.toggle()
     if (!this.scene.hidden) this.scene.keydown(event)
     else if (!this.controls.hidden) this.controls.keydown(event)
     else if (!this.title.hidden) this.title.keydown(event)
   }
 
-  get state () {
+  get state() {
     return this._state
   }
 
-  set state (value) {
+  set state(value) {
     this._state = value
 
     this.scene.hidden = this.state !== 'play'
@@ -261,7 +338,7 @@ class Game {
     this.dialog.hidden = this.state !== 'edit'
   }
 
-  tick (scale) {
+  tick(scale) {
     this.scene.tick(scale)
     this.controls.tick(scale)
   }
@@ -276,11 +353,11 @@ if (level) {
     game.scene.fromURL = true
     game.scene.index = 0
     game.state = 'play'
-  } catch (error) {}
+  } catch (error) { }
 }
 
 let previous = 0
-requestAnimationFrame(function tick (time) {
+requestAnimationFrame(function tick(time) {
   // To deal with different frame rates, we define per-second speeds and adjust
   // them according to the time since the last frame was rendered.
   const duration = time - previous
