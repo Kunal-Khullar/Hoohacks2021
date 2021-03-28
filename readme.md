@@ -33,7 +33,7 @@ We used html and vanilla JavaScript for webpage. Backend is made using graphql. 
 
 ## Contributors
 
-- [Harmanjit Singh](https://github.com/Harmanjit14)
+- [Harmanjit Singh](https://github.com/Harmanjit14) [repo](https://github.com/Harmanjit14/food-scanner-ML)
 - [Kunal Khullar](https://github.com/Kunal-Khullar)
-- [Gurleen Kaur](https://github.com/gurleen-kaur1313)
+- [Gurleen Kaur](https://github.com/gurleen-kaur1313) [repo](https://github.com/gurleen-kaur1313/health_backend)
 - [Paritosh Arora](https://github.com/CLASHERBROs)
