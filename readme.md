@@ -1,4 +1,4 @@
-# UNFIT
+# FUNFIT
 
 ## Index
 
@@ -7,7 +7,7 @@
 3. [Contributing](#contributing)
 4. [Contributors](#contributors)
 
-## About UNFIT
+## About FUNFIT
 
 Fed up of all the boring health apps which are no where helping you to maintain a healthy diet plan?
 Switch to **funfit**- now maintaining good health's a fun.
@@ -28,3 +28,8 @@ As our application also shows the daily leaderboard based upon your scores, it m
 - Flutter
 
 ## Contributors
+
+- [Harmanjit Singh](https://github.com/Harmanjit14)
+- [Kunal Khullar](https://github.com/Kunal-Khullar)
+- [Gurleen Kaur](https://github.com/gurleen-kaur1313)
+- [Paritosh Arora](https://github.com/CLASHERBROs)
