@@ -10,7 +10,7 @@
 //   // Initialize Firebase
 //   firebase.initializeApp(firebaseConfig);
 //   firebase.analytics();
-  const SignUp = async (age, email, gender, height, names, password, username, weight) => {
+const SignUp = async (age, email, gender, height, names, password, username, weight) => {
     console.log(`age:${age},email:${email},gender:${gender},height:${height},name:${names},password:${password},username:${username},
  weight:${weight}`);
     fetch('https://veehacks-backend.herokuapp.com/graphql/', {
@@ -39,11 +39,14 @@
         }),
     })
         .then((res) => res.json())
-        .then((result) => console.log(result));
+        .then((result) => {
+            console.log(result)
+            window.location.href = 'home.html';
+        });
 }
 
 
-   
+
 
 
 function nextform() {
@@ -71,7 +74,7 @@ function register() {
         console.log(e.message)
     }
 }
-const Login =  (username, password) => {
+const Login = (username, password) => {
 
 
     fetch('https://veehacks-backend.herokuapp.com/graphql/', {

@@ -24,7 +24,7 @@ class Scene extends Body {
     this.esc = new Body(document.getElementById('esc'))
     this.game = game
     this.levels = levels
-   
+
     this.bars = []
     this.spikes = []
     this.paused = false
@@ -169,9 +169,41 @@ class Scene extends Body {
   }
 
   async death() {
-    if (localStorage.getItem("lives") <= 0) {
-      alert("not enough lives log your food on our app");
+    if (localStorage.getItem("lives") <= 1) {
+      fetch('https://veehacks-backend.herokuapp.com/graphql/', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          "Authorization": `JWT ${localStorage.getItem('token')}`
+        },
+        body: JSON.stringify({
+          query: `
+          mutation UpdateUser($life:Int,$score:Int){
+            updateUser(life:$life,score:$score){
+              update{
+                maxScore
+                gameLife
+              }
+            }
+          }
+             `,
+          variables: {
+            life: localStorage.getItem('lives') - 1,
+            score: this.index + 1
+
+          }
+        }),
+      })
+        .then((res) => res.json())
+        .then((result) => {
+          console.log(result.data)
+          localStorage.setItem("lives", result.data.updateUser.update.gameLife)
+
+        });
+      alert("not enough lives log your food on our app and increase nutrition value");
+
       window.location.href = "../pages/home.html"
+
     }
     DEATH_FX.play()
     this.deaths.value += 1
@@ -185,6 +217,7 @@ class Scene extends Body {
       this.deaths.value = 0;
     }
     else {
+
       fetch('https://veehacks-backend.herokuapp.com/graphql/', {
         method: 'POST',
         headers: {
@@ -274,7 +307,7 @@ class Scene extends Body {
   }
 
   tick(scale) {
-    
+
 
     if (this.paused || this.hidden) return
 
@@ -287,7 +320,7 @@ class Scene extends Body {
     this.guy.y += Math.min(bottom, Math.max(top, this.guy.vy))
 
     if (bottom === 0) {
-      this.guy.vy = upKey() ? -scale(900+localStorage.getItem('nutrition')*10) : 0
+      this.guy.vy = upKey() ? -scale(900 + localStorage.getItem('nutrition') * 10) : 0
       if (upKey()) JUMP_FX.play()
     } else {
       this.guy.vy = Math.min(scale(600), this.guy.vy + scale(120))
