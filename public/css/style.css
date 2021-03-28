@@ -1,9 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
 body{
     background-color: #91dae6 !important;
-    overflow: hidden;
+    overflow-x: hidden;
     font-family: 'Poppins', sans-serif !important;
-    
+    overflow-y: scroll;
 }
 .container_left{
 background: url("https://cdn.dribbble.com/users/3960463/screenshots/14473863/119_medical_care-01.png") no-repeat center center;
@@ -61,7 +61,7 @@ border: 1px solid rgba( 255, 255, 255, 0.18 );
     text-decoration: none;
 }
 .golog{
-    margin-top: 15rem;
+    margin-top: 12rem;
 }
 .innerGlass p{
     color: snow;
@@ -226,8 +226,20 @@ canvas{
 .nutritionstats table{
     margin: 1rem 2rem;
 }
+.navbar-brand{
+    color: snow !important;
+    font-weight: bolder;
+    font-family: 'Poppins';
+    margin-left:1rem ;
+}
 #myChart2{
     width:30rem !important;
     margin-left: 5rem;
     height:28rem !important
+}
+footer{
+    font-size: 1.6rem;
+    text-align:center;
+    background: #222;
+    color: snow;padding: 2rem;
 }
