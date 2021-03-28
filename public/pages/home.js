@@ -74,3 +74,6 @@ fetch('https://veehacks-backend.herokuapp.com/graphql/', {
         // localStorage.setItem('token', result.data.tokenAuth.token) //saving token
         // window.location.href = 'home.html';
     });
+function startGame() {
+    window.location.href = '../game/game.html';
+}
