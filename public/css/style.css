@@ -73,6 +73,9 @@ border: 1px solid rgba( 255, 255, 255, 0.18 );
 }
 #homebody{
     background:snow !important;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    scroll-behavior: smooth !important;
 }
 nav{
     background-color:darkslateblue !important;
@@ -80,6 +83,30 @@ nav{
 }
 .main_container .row{
     height:100vh
+}
+.about .row{
+    height: 70vh;
+    padding: 5vh 5rem;
+    margin-top: 3rem;
+    background-color:#008275;
+}
+.rightabout{
+    background: url("https://cdn.dribbble.com/users/2008861/screenshots/14293050/media/81c828595bd4135765fa3df8087dd467.gif") no-repeat center center;
+    background-size: cover;
+}
+.leftabout p{
+    font-family: 'POPPINS';
+    color: #ccc;
+    text-align: justify;
+    font-weight: 200;
+    letter-spacing: 2px;
+    padding-top: 1rem;
+}
+.leftabout h1{
+    font-size: 3rem;
+    color: #ccc;
+    text-shadow: 1px 1px 5px #000b08;
+    margin-top: 2rem;
 }
 nav li a{
     color: snow !important;
@@ -140,7 +167,48 @@ li{
     background-color: snow !important;
     color: darkslateblue !important;
 }
+.playgame{
+    text-align: center;
+    padding: 2rem;
+    margin-top: 2rem;
+}
+.play{
+    width: 7rem !important;
+    margin-bottom: 1rem;
+    height: 2.8rem !important;
+    background:#008275 !important;
+    color: snow !important;
+    transition: background-color 500ms ease !important;
+}
+.play:hover{
+    background-color:#ccc !important;
+    color: #008275 !important;
+}
+.leaderboard h1{
+    text-shadow: 1px 1px 2px;
+    text-align: center;
+    padding-bottom: 1rem;
+}
 #id1{
     background:url("https://cdn.dribbble.com/users/59947/screenshots/15147954/muti_2_4x.jpg") no-repeat center center;
     background-size: cover !important;
+}
+td img{
+    width:10%
+}
+
+.leaderboard .row{
+    background: #eee;
+    padding: 2rem;
+}
+td,th {
+    vertical-align:center
+}
+.right{
+    overflow-y: scroll;
+    height: 40vh;
+    
+}
+.right::-webkit-scrollbar{
+    display:none
 }
